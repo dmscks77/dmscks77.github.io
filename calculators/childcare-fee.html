@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>어린이집·유치원 보육료 지원금 계산기 2026 | 맘편한계산</title>
+<meta name="description" content="2026년 기준 어린이집·유치원 보육료 정부 지원금을 연령별로 계산해보세요. 만 0~5세 무상보육 지원단가를 바로 확인할 수 있습니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --bg:#F5F7F4; --surface:#FFFFFF; --ink:#1F2A24; --muted:#657268;
+    --primary:#2F5D50; --primary-soft:#DCE8E1; --accent:#E2A33D; --line:#DCE3DE;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+  .wrap{max-width:640px;margin:0 auto;padding:32px 20px 80px;}
+  header.site{margin-bottom:28px;}
+  .brand{display:inline-flex;align-items:baseline;gap:6px;font-weight:800;font-size:18px;color:var(--primary);text-decoration:none;}
+  .brand span{font-weight:400;font-size:13px;color:var(--muted);}
+  h1{font-size:26px;font-weight:800;margin:20px 0 6px;letter-spacing:-0.02em;}
+  .lead{color:var(--muted);font-size:15px;margin:0 0 28px;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:20px;}
+  label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;}
+  .field{margin-bottom:18px;}
+  .field .hint{font-size:12.5px;color:var(--muted);margin-top:5px;}
+  .radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+  .radio-option{
+    flex:1;min-width:70px;border:1px solid var(--line);border-radius:9px;padding:12px 8px;
+    text-align:center;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);background:#FBFCFB;
+  }
+  .radio-option.active{border-color:var(--primary);color:var(--primary);background:var(--primary-soft);}
+  .radio-option input{display:none;}
+  button.calc{
+    width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:9px;
+    font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;
+  }
+  button.calc:hover{background:#274d42;}
+  .result{display:none;}
+  .result.show{display:block;}
+  .total-box{background:var(--primary-soft);border-radius:12px;padding:20px;margin-bottom:16px;text-align:center;}
+  .total-box .label{font-size:13px;color:var(--primary);font-weight:600;margin-bottom:4px;}
+  .total-box .amount{font-size:30px;font-weight:800;color:var(--primary);letter-spacing:-0.02em;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--line);}
+  th:first-child,td:first-child{text-align:left;}
+  th{color:var(--muted);font-weight:600;font-size:12.5px;}
+  .note{font-size:13px;color:var(--muted);background:#FBF5EA;border:1px solid #EEE0C2;border-radius:10px;padding:14px 16px;margin-top:16px;}
+  section.info{margin-top:36px;}
+  section.info h2{font-size:18px;font-weight:700;margin:0 0 10px;}
+  section.info p{font-size:14.5px;color:#3B463F;margin:0 0 14px;}
+  .faq-item{border-top:1px solid var(--line);padding:16px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item .q{font-weight:700;font-size:15px;margin-bottom:6px;}
+  .faq-item .a{font-size:14px;color:#3B463F;}
+  footer{margin-top:48px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;}
+  footer a{color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <a href="../index.html" class="brand">맘편한계산 <span>육아 지원금 계산기 모음</span></a>
+  </header>
+
+  <h1>어린이집·유치원 보육료 계산기 (2026년 기준)</h1>
+  <p class="lead">아이 연령만 선택하면 정부에서 지원하는 보육료 지원단가를 바로 확인할 수 있어요.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>아이 연령</label>
+      <div class="radio-group" id="ageGroup">
+        <label class="radio-option active" data-value="0"><input type="radio" name="age" value="0" checked> 만 0세</label>
+        <label class="radio-option" data-value="1"><input type="radio" name="age" value="1"> 만 1세</label>
+        <label class="radio-option" data-value="2"><input type="radio" name="age" value="2"> 만 2세</label>
+        <label class="radio-option" data-value="35"><input type="radio" name="age" value="35"> 만 3~5세</label>
+      </div>
+    </div>
+
+    <button class="calc" onclick="calculate()">계산하기</button>
+  </div>
+
+  <div class="result" id="result">
+    <div class="total-box">
+      <div class="label">월 보육료 지원금</div>
+      <div class="amount" id="monthlyAmount">0원</div>
+    </div>
+
+    <div class="card">
+      <table>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="note" id="parentalNote"></div>
+  </div>
+
+  <section class="info">
+    <h2>2026년 보육료 지원, 이렇게 받아요</h2>
+    <p>어린이집·유치원을 이용하는 만 0~5세 아동은 <strong>소득 수준과 관계없이</strong> 보육료를 지원받아요. 연령이 어릴수록 지원단가가 높고, 나이가 들수록 낮아지는 구조예요.</p>
+    <p>이 지원금은 부모에게 현금으로 지급되는 게 아니라, <strong>국민행복카드(아이행복카드)를 통해 어린이집·유치원에 직접 지급</strong>되는 방식이에요. 그래서 실제로는 보육료 고지서에서 이 금액만큼 자동으로 차감돼요.</p>
+
+    <div class="faq-item">
+      <div class="q">부모급여랑 같이 받을 수 있나요?</div>
+      <div class="a">네, 만 0~1세는 부모급여와 보육료 지원 중 유리한 방식을 선택하거나 병행할 수 있어요. 어린이집을 이용하면 부모급여가 보육료 바우처로 전환되고, 부모급여 금액이 보육료 지원금보다 크면 그 차액을 현금으로 받아요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">신청은 어떻게 하나요?</div>
+      <div class="a">아이행복카드를 발급받은 뒤, 복지로(bokjiro.go.kr) 또는 어린이집을 통해 보육료 지원을 신청하면 돼요. 보통 어린이집 입소 시 원에서 함께 안내해줘요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">유치원도 똑같이 받나요?</div>
+      <div class="a">만 3~5세는 누리과정 대상이라 어린이집과 유치원 모두 비슷한 수준의 지원을 받아요. 다만 유치원은 교육비 지원 체계가 약간 달라서, 정확한 금액은 다니는 기관에 확인하는 게 정확해요.</div>
+    </div>
+  </section>
+
+  <footer>
+    본 계산기는 참고용이며 법적 효력이 없습니다. 정확한 지원액은 복지로(bokjiro.go.kr) 또는 다니는 기관을 통해 확인하세요. · 기준: 2026년도 보육사업안내(교육부) · <a href="../privacy.html">개인정보처리방침</a>
+  </footer>
+</div>
+
+<script>
+function won(n){ return Math.round(n).toLocaleString('ko-KR') + '원'; }
+
+document.querySelectorAll('#ageGroup .radio-option').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('#ageGroup .radio-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+    el.querySelector('input').checked = true;
+  });
+});
+
+const RATES = {
+  '0': { label: '만 0세', monthly: 510000 },
+  '1': { label: '만 1세', monthly: 450000 },
+  '2': { label: '만 2세', monthly: 370000 },
+  '35': { label: '만 3~5세 (누리과정)', monthly: 280000 },
+};
+
+function calculate(){
+  const age = document.querySelector('input[name="age"]:checked').value;
+  const r = RATES[age];
+
+  document.getElementById('monthlyAmount').textContent = won(r.monthly);
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = `
+    <tr><td>연령</td><td>${r.label}</td></tr>
+    <tr><td>월 지원단가</td><td>${won(r.monthly)}</td></tr>
+    <tr><td>연간 환산</td><td>${won(r.monthly * 12)}</td></tr>
+  `;
+
+  const note = document.getElementById('parentalNote');
+  if(age === '0' || age === '1'){
+    note.textContent = '만 0~1세는 부모급여와 비교해서 더 유리한 쪽으로 받을 수 있어요. 어린이집 이용 시 부모급여가 이 보육료 바우처로 먼저 전환되고, 차액은 현금으로 지급돼요.';
+  } else {
+    note.textContent = '이 금액은 국민행복카드를 통해 어린이집·유치원에 직접 지급돼요. 실제 부모 부담금은 기관별 수납한도액에 따라 달라질 수 있어요.';
+  }
+
+  document.getElementById('result').classList.add('show');
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
