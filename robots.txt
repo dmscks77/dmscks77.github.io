@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dmscks77.github.io/sitemap.xml
