@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>맘편한계산 | 육아 지원금·급여 계산기 모음</title>
+<meta name="description" content="육아휴직급여, 출산지원금 등 육아 관련 지원금을 쉽고 빠르게 계산해보세요. 최신 제도 기준으로 매번 업데이트됩니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --bg:#F5F7F4;
+    --surface:#FFFFFF;
+    --ink:#1F2A24;
+    --muted:#657268;
+    --primary:#2F5D50;
+    --primary-soft:#DCE8E1;
+    --accent:#E2A33D;
+    --line:#DCE3DE;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Pretendard',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
+  .brand{font-weight:800;font-size:18px;color:var(--primary);margin-bottom:4px;}
+  h1{font-size:26px;font-weight:800;margin:18px 0 8px;letter-spacing:-0.02em;}
+  .lead{color:var(--muted);font-size:15px;margin:0 0 32px;}
+  .list{display:flex;flex-direction:column;gap:12px;}
+  a.item{
+    display:block;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  a.item:hover{border-color:var(--primary);}
+  a.item .name{font-weight:700;font-size:16px;margin-bottom:4px;}
+  a.item .desc{font-size:13.5px;color:var(--muted);}
+  a.item.soon{opacity:0.5;pointer-events:none;}
+  .tag{
+    display:inline-block;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent);
+    background:#FBF1DE;
+    border-radius:6px;
+    padding:2px 8px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  footer{
+    margin-top:48px;font-size:12.5px;color:var(--muted);
+    border-top:1px solid var(--line);padding-top:18px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">맘편한계산</div>
+  <h1>육아 지원금, 헷갈리지 않게</h1>
+  <p class="lead">복잡한 육아휴직급여·출산지원금 제도를 숫자만 넣으면 바로 계산해드려요. 제도가 바뀔 때마다 최신 기준으로 업데이트합니다.</p>
+
+  <div class="list">
+    <a class="item" href="calculators/parental-leave-pay.html">
+      <div class="name">육아휴직급여 계산기 <span class="tag">2026</span></div>
+      <div class="desc">통상임금과 휴직 개월수만 입력하면 월별 예상 수령액을 바로 확인</div>
+    </a>
+    <a class="item soon" href="#">
+      <div class="name">출산지원금(첫만남이용권) 계산기</div>
+      <div class="desc">준비 중</div>
+    </a>
+    <a class="item soon" href="#">
+      <div class="name">어린이집·유치원 지원금 계산기</div>
+      <div class="desc">준비 중</div>
+    </a>
+  </div>
+
+  <footer>
+    본 사이트의 계산 결과는 참고용이며 법적 효력이 없습니다. 정확한 정보는 고용24(work24.go.kr) 및 관할 기관을 통해 확인하세요.
+  </footer>
+</div>
+</body>
+</html>
